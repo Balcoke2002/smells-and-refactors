@@ -1,6 +1,6 @@
 // TODO: Refactor this code to follow clean naming conventions
 
-class Prod {
+class Product {
   constructor(
     public n: string,
     public p: number,
@@ -9,30 +9,30 @@ class Prod {
   ) {}
 }
 
-class Usr {
+class User {
   constructor(
     public id: number,
-    public nm: string,
-    public e: string,
-    public blocked: boolean,
-    public bal: number
+    public name: string,
+    public email: string,
+    public isBlocked: boolean,
+    public balance: number
   ) {}
 }
 
-class Ord {
+class Order {
   constructor(
-    public no: number,
-    public u: Usr,
+    public nb: number,
+    public user: Usr,
     public items: Prod[],
-    public st: string
+    public name: string
   ) {}
 }
 
 class Mgr {
-  private data: Ord[] = [];
+  private data: Order[] = [];
   private flag = true;
 
-  do(x: Ord): boolean {
+  do(x: Order): boolean {
     if (!this.check(x)) {
       console.log("err");
       return false;
@@ -104,20 +104,20 @@ class Mgr {
   }
 }
 
-function main01() {
+function main() {
   const mgr = new Mgr();
-  const u1 = new Usr(1, "John", "j@test.com", false, 1000);
-  const p1 = new Prod("Laptop", 999, 1, true);
-  const p2 = new Prod("Mouse", 25, 2, false);
-  const ord1 = new Ord(1001, u1, [p1, p2], "ready");
+  const user1 = new User(1, "John", "j@test.com", false, 1000);
+  const product1 = new Product("Laptop", 999, 1, true);
+  const product2 = new Product("Mouse", 25, 2, false);
+  const order1 = new Order(1001, user1, [product1, product2], "ready");
 
-  const res = mgr.do(ord1);
+  const res = mgr.do(order1);
   console.log(res ? "OK" : "FAIL");
-  console.log("Balance: " + u1.bal);
+  console.log("Balance: " + user1.bal);
 
   mgr.run1(1001);
-  console.log("Product: " + p1.n);
-  console.log("User ID: " + u1.id);
+  console.log("Product: " + product1.n);
+  console.log("User ID: " + user1.id);
 }
 
 main01();
